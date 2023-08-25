@@ -1,0 +1,9 @@
+from https://www.reddit.com/r/windowsinsiders/comments/uurnqd/displayswitchexe_only_opens_the_menu_regardless/
+
+C：\Users\yournamehere\Desktop\DisplaySwitch.exe /internal
+
+C：\Users\yournamehere\Desktop\DisplaySwitch.exe /external
+
+C：\Users\yournamehere\Desktop\DisplaySwitch.exe /extend
+
+C：\Users\yournamehere\Desktop\DisplaySwitch.exe /clone
