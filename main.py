@@ -57,16 +57,17 @@ if getattr(sys, 'frozen', False):  # 判断是否打为包
     SERVER_FILE = path_join(sys._MEIPASS, "static")
 elif __file__:
     ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-    SERVER_FILE = path_join(os.path.abspath(
-        path_join(ROOT_PATH, r"..")), "static")
+    SERVER_FILE = path_join(ROOT_PATH, "static")
 
 QRes_path = path_join(SERVER_FILE,"QRes.exe")
-DisplaySwitch = path_join(SERVER_FILE,"DisplaySwitch.exe")
+DisplaySwitch_path = path_join(SERVER_FILE,"DisplaySwitch.exe")
 # print("QRes_path",QRes_path)
 # print("DisplaySwitch",DisplaySwitch)
 
 def QRes(width, height, rate):
-    result = subprocess.run(rf"QRes.exe /X:{width} /Y:{height} /R:{rate}",
+    cmd = rf"{QRes_path} /X:{width} /Y:{height} /R:{rate}"
+    print(cmd)
+    result = subprocess.run(cmd,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
     return {
         "stdout": result.stdout,
@@ -79,7 +80,9 @@ def DisplaySwitch(type):
     if int(type) not in [1, 2, 3, 4]:
         return 'type must in [1,2,3,4]'
     typeStr = ["internal", "external", "extend", "clone"][int(type)-1]
-    result = subprocess.run(rf"DisplaySwitch.exe /{typeStr}",
+    cmd = rf"{DisplaySwitch_path} /{typeStr}"
+    print(cmd)
+    result = subprocess.run(cmd,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
     return {
         "stdout": result.stdout,
